@@ -1,79 +1,42 @@
 package com.example.demo;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
-import static javax.persistence.GenerationType.SEQUENCE;
-
-@Entity(name = "Student")
-@Table(
-        name = "student",
-        uniqueConstraints = {
-                @UniqueConstraint(name = "student_email_unique", columnNames = "email")
-        }
-)
+@Entity(name="Student")
+@Table(name = "student")
 public class Student {
-
     @Id
     @SequenceGenerator(
             name = "student_sequence",
             sequenceName = "student_sequence",
+            initialValue = 0,
             allocationSize = 1
     )
     @GeneratedValue(
-            strategy = SEQUENCE,
+            strategy = GenerationType.SEQUENCE,
             generator = "student_sequence"
     )
-    @Column(
-            name = "id",
-            updatable = false
-    )
+    @Column(name = "id", updatable = false)
     private Long id;
 
-    @Column(
-            name = "first_name",
-            nullable = false,
-            columnDefinition = "TEXT"
-    )
+    @Column(name = "first_name", nullable = false, columnDefinition = "TEXT")
     private String firstName;
 
-    @Column(
-            name = "last_name",
-            nullable = false,
-            columnDefinition = "TEXT"
-    )
+    @Column(name = "last_name", nullable = false, columnDefinition = "TEXT")
     private String lastName;
 
-    @Column(
-            name = "email",
-            nullable = false,
-            columnDefinition = "TEXT"
-    )
+    @Column(name = "email", nullable = false, columnDefinition = "TEXT", unique = true)
     private String email;
 
-    @Column(
-            name = "age",
-            nullable = false
-
-    )
+    @Column(name = "age", nullable = false)
     private Integer age;
 
-    public Student(Long id,
-                   String firstName,
-                   String lastName,
-                   String email,
-                   Integer age) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.age = age;
-    }
 
     public Student() {
 
     }
 
-    public Long getId() {
+    public Long id() {
         return id;
     }
 
@@ -81,7 +44,7 @@ public class Student {
         this.id = id;
     }
 
-    public String getFirstName() {
+    public String firstName() {
         return firstName;
     }
 
@@ -89,7 +52,7 @@ public class Student {
         this.firstName = firstName;
     }
 
-    public String getLastName() {
+    public String lastName() {
         return lastName;
     }
 
@@ -97,7 +60,7 @@ public class Student {
         this.lastName = lastName;
     }
 
-    public String getEmail() {
+    public String email() {
         return email;
     }
 
@@ -105,7 +68,7 @@ public class Student {
         this.email = email;
     }
 
-    public Integer getAge() {
+    public Integer age() {
         return age;
     }
 
